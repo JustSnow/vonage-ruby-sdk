@@ -112,6 +112,9 @@ on disk outside of source control, or in some kind of key management infrastruct
 
 By default the library generates a short lived JWT per request. To generate a long lived
 JWT for multiple requests or to specify JWT claims directly use `Vonage::JWT.generate` and
+
+For using endpoints where need permissions, need provide [acl](https://developer.nexmo.com/conversation/guides/jwt-acl#paths)
+
 the token option. For example:
 
 ```ruby
@@ -119,6 +122,11 @@ claims = {
   application_id: application_id,
   private_key: 'path/to/private.key',
   nbf: 1483315200,
+  acl: {
+    'paths' => {
+      '/*/conversations/**' => {}
+    }
+  },
   ttl: 800
 }
 
